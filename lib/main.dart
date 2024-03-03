@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: ' Первое приложение',
       home: MoveSquareScreen(),
     );
@@ -15,6 +17,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MoveSquareScreen extends StatefulWidget {
+  const MoveSquareScreen({super.key});
+
   @override
   _MoveSquareScreenState createState() => _MoveSquareScreenState();
 }
@@ -28,6 +32,8 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
   bool canMoveLeft = true;
   bool canMoveRight = true;
 
+  // Не используй стринг для определения направления движения куба.
+  // Тут лучше использовать enum.
   void moveSquare(String direction) {
     setState(() {
       switch (direction) {
@@ -80,7 +86,7 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Center(
+        title: const Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -124,51 +130,51 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
               thickness: 2,
               color: Colors.black,
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: canMoveUp ? () => moveSquare('up') : null,
-              child: Padding(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: canMoveUp ? Colors.pink : Colors.grey,
+              ),
+              child: const Padding(
                   padding: EdgeInsets.all(15),
                   child: Text('Вверх', style: TextStyle(color: Colors.white))),
-              style: ElevatedButton.styleFrom(
-                primary: canMoveUp ? Colors.pink : Colors.grey,
-              ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
                   onPressed: canMoveLeft ? () => moveSquare('left') : null,
-                  child: Padding(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: canMoveLeft ? Colors.pink : Colors.grey,
+                  ),
+                  child: const Padding(
                       padding: EdgeInsets.all(15),
                       child:
                           Text('Влево', style: TextStyle(color: Colors.white))),
-                  style: ElevatedButton.styleFrom(
-                    primary: canMoveLeft ? Colors.pink : Colors.grey,
-                  ),
                 ),
                 ElevatedButton(
                   onPressed: canMoveRight ? () => moveSquare('right') : null,
-                  child: Padding(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: canMoveRight ? Colors.pink : Colors.grey,
+                  ),
+                  child: const Padding(
                       padding: EdgeInsets.all(15),
                       child: Text('Вправо',
                           style: TextStyle(color: Colors.white))),
-                  style: ElevatedButton.styleFrom(
-                    primary: canMoveRight ? Colors.pink : Colors.grey,
-                  ),
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: canMoveDown ? () => moveSquare('down') : null,
-              child: Padding(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: canMoveDown ? Colors.pink : Colors.grey,
+              ),
+              child: const Padding(
                   padding: EdgeInsets.all(15),
                   child: Text('Вниз', style: TextStyle(color: Colors.white))),
-              style: ElevatedButton.styleFrom(
-                primary: canMoveDown ? Colors.pink : Colors.grey,
-              ),
             ),
           ],
         ),
