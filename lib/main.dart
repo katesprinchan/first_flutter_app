@@ -23,6 +23,8 @@ class MoveSquareScreen extends StatefulWidget {
   _MoveSquareScreenState createState() => _MoveSquareScreenState();
 }
 
+enum DirectionOfSquare { up, down, left, right }
+
 class _MoveSquareScreenState extends State<MoveSquareScreen> {
   double squarePositionX = 100.0;
   double squarePositionY = 100.0;
@@ -32,12 +34,10 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
   bool canMoveLeft = true;
   bool canMoveRight = true;
 
-  // Не используй стринг для определения направления движения куба.
-  // Тут лучше использовать enum.
-  void moveSquare(String direction) {
+  void moveSquare(DirectionOfSquare direction) {
     setState(() {
       switch (direction) {
-        case 'up':
+        case DirectionOfSquare.up:
           if (squarePositionY > 0) {
             squarePositionY -= 50.0;
             if (squarePositionY == 0) {
@@ -47,7 +47,7 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
             }
           }
           break;
-        case 'down':
+        case DirectionOfSquare.down:
           if (squarePositionY < 100) {
             squarePositionY += 50.0;
             if (squarePositionY == 100) {
@@ -57,7 +57,7 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
             }
           }
           break;
-        case 'left':
+        case DirectionOfSquare.left:
           if (squarePositionX > 0) {
             squarePositionX -= 50.0;
             if (squarePositionX == 0) {
@@ -67,7 +67,7 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
             }
           }
           break;
-        case 'right':
+        case DirectionOfSquare.right:
           if (squarePositionX < 100) {
             squarePositionX += 50.0;
             if (squarePositionX == 100) {
@@ -132,7 +132,8 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: canMoveUp ? () => moveSquare('up') : null,
+              onPressed:
+                  canMoveUp ? () => moveSquare(DirectionOfSquare.up) : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: canMoveUp ? Colors.pink : Colors.grey,
               ),
@@ -145,7 +146,9 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: canMoveLeft ? () => moveSquare('left') : null,
+                  onPressed: canMoveLeft
+                      ? () => moveSquare(DirectionOfSquare.left)
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: canMoveLeft ? Colors.pink : Colors.grey,
                   ),
@@ -155,7 +158,9 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
                           Text('Влево', style: TextStyle(color: Colors.white))),
                 ),
                 ElevatedButton(
-                  onPressed: canMoveRight ? () => moveSquare('right') : null,
+                  onPressed: canMoveRight
+                      ? () => moveSquare(DirectionOfSquare.right)
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: canMoveRight ? Colors.pink : Colors.grey,
                   ),
@@ -168,7 +173,8 @@ class _MoveSquareScreenState extends State<MoveSquareScreen> {
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
-              onPressed: canMoveDown ? () => moveSquare('down') : null,
+              onPressed:
+                  canMoveDown ? () => moveSquare(DirectionOfSquare.down) : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: canMoveDown ? Colors.pink : Colors.grey,
               ),
