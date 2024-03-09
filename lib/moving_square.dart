@@ -31,7 +31,7 @@ class MoveSquareScreen extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: BlocBuilder<SquarePositionCubit, Map<String, dynamic>>(
+          child: BlocBuilder<SquarePositionCubit, SquarePositionState>(
             builder: (context, state) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,8 +43,8 @@ class MoveSquareScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         Positioned(
-                          left: state['x'],
-                          top: state['y'],
+                          left: state.x,
+                          top: state.y,
                           child: Container(
                             width: 50.0,
                             height: 50.0,
@@ -61,14 +61,14 @@ class MoveSquareScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: state['canMoveUp']
+                    onPressed: state.canMoveUp // Исправлено
                         ? () => context
                             .read<SquarePositionCubit>()
                             .move(DirectionOfSquare.up)
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          state['canMoveUp'] ? Colors.pink : Colors.grey,
+                          state.canMoveUp ? Colors.pink : Colors.grey,
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(15),
@@ -81,14 +81,14 @@ class MoveSquareScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: state['canMoveLeft']
+                        onPressed: state.canMoveLeft
                             ? () => context
                                 .read<SquarePositionCubit>()
                                 .move(DirectionOfSquare.left)
                             : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              state['canMoveLeft'] ? Colors.pink : Colors.grey,
+                              state.canMoveLeft ? Colors.pink : Colors.grey,
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(15),
@@ -97,14 +97,14 @@ class MoveSquareScreen extends StatelessWidget {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: state['canMoveRight']
+                        onPressed: state.canMoveRight
                             ? () => context
                                 .read<SquarePositionCubit>()
                                 .move(DirectionOfSquare.right)
                             : null,
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              state['canMoveRight'] ? Colors.pink : Colors.grey,
+                              state.canMoveRight ? Colors.pink : Colors.grey,
                         ),
                         child: const Padding(
                           padding: EdgeInsets.all(15),
@@ -116,14 +116,14 @@ class MoveSquareScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: state['canMoveDown']
+                    onPressed: state.canMoveDown
                         ? () => context
                             .read<SquarePositionCubit>()
                             .move(DirectionOfSquare.down)
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
-                          state['canMoveDown'] ? Colors.pink : Colors.grey,
+                          state.canMoveDown ? Colors.pink : Colors.grey,
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(15),
